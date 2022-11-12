@@ -5,6 +5,8 @@ import pandas as pd
 
 tabs = st.tabs(["Intro","Visualize","Machine Learning - Predict" ])
 tab_intro = tabs[0]
+#image = "2560px-EOG_Resources_logo.svg.png"
+#st.image(image)
 with tab_intro:
     st.title("EOG RESOURCES")
     st.sidebar.subheader("Visualization Settings ")
@@ -39,6 +41,7 @@ tab_ml = tabs[2]
 with tab_ml:
     st.title("Prediction")
     predict_text = st.text_input('How down the astriod do you to drill to ')
+    st.metric(label="Drillbit to use - ", value=predict_text)
 
 
 
