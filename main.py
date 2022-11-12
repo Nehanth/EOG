@@ -5,8 +5,11 @@ import pandas as pd
 
 tabs = st.tabs(["Intro","Visualize","Machine Learning - Predict" ])
 tab_intro = tabs[0]
+
+#logo creation
 #image = "2560px-EOG_Resources_logo.svg.png"
 #st.image(image)
+
 with tab_intro:
     st.title("EOG RESOURCES")
     st.sidebar.subheader("Visualization Settings ")
