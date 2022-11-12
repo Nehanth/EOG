@@ -12,8 +12,9 @@ tab_intro = tabs[0]
 
 with tab_intro:
     st.title("EOG RESOURCES")
-    st.sidebar.subheader("Visualization Settings ")
-    uf = st.sidebar.file_uploader(label="Upload your CSV File",
+
+    #st.sidebar.subheader("Visualization Settings ")
+    uf = st.file_uploader(label="Upload your CSV File",
                              type =['csv', 'xlsx'])
     global df
     if uf is not None:
