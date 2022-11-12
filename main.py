@@ -6,7 +6,7 @@ import pandas as pd
 tabs = st.tabs(["Intro","Visualize","Machine Learning - Predict" ])
 tab_intro = tabs[0]
 
-#logo creation
+#logo creationn
 #image = "2560px-EOG_Resources_logo.svg.png"
 #st.image(image)
 
