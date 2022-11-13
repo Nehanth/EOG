@@ -4,16 +4,18 @@ import plotly_express as px
 import utils
 
 
+
+
+
 data = {
 }
 options = ["Custom Dataset"]
 for i in range(1, 11):
     options.append("Asteroid " + str(i))
-    data["Asteroid " + str(i)] = "./Data/cleanAsteroid"+str(i)+".csv"
-
-# - depth
+    data["Asteroid "+ str(i)] = "./Data/cleanAsteroid"+str(i)+".csv"
 
 
+# - depth over
 def analysis():
     st.title("Data Analysis")
 
@@ -42,15 +44,33 @@ def analysis():
         # DEFINE THE TITLE OF THE SIDEBAR
         st.sidebar.title(select)
 
-        # DISPLAY ALL RELEVANT DATA FOR EACH COLUMN FOR THAT ROW
-        st.sidebar.header("Columns:")
-        for column in df.columns:
-            st.sidebar.write(column)
+        # INPUT BOX FOR NUMBER OF DECIMALS TO ROUND OFF
+        roundOff = st.sidebar.slider(label="Decimal Round Off", min_value=1, max_value=4)
+
+        utils.bits = {}
 
         st.sidebar.subheader("Pertinent Info")
         st.sidebar.write("Total Rows:", len(df.index))
-        st.sidebar.write('Total cost of this asteroid mining' + utils.TC(df))
+        TOTAL_COST = int(utils.TC(df))
+        st.sidebar.write('Total cost:', TOTAL_COST)
+        st.sidebar.write('Drill Bits: ', utils.bits)
+
+
+        # DISPLAY ALL RELEVANT DATA FOR EACH COLUMN FOR THAT ROW
+        st.sidebar.subheader("Columns Info")
+        for column in df.columns:
+            if(column == "DRILL_BIT_NAME"):
+                pass
+            else:
+                st.sidebar.write(column)
+                st.sidebar.write("Average:", utils.getAverage(df, column, roundOff))
+                st.sidebar.write("Min:", utils.getMin(df, column, roundOff))
+                st.sidebar.write("Max:", utils.getMax(df, column, roundOff))
+
 
     except Exception as e:
         print(e)
         st.write("Please select dataset for analysis")
+
+
+

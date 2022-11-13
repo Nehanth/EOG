@@ -3,18 +3,25 @@ import numpy as np
 import math
 
 
+
+
+
 class drillBit:
     def __init__ (self, name, cPerRun, cPerFoot, cPerHour):
         self.name = name
         self.cPerRun = cPerRun
         self.cPerFoot = cPerFoot
         self.cPerHour = cPerHour
+
   
 
 Buzz = drillBit('Buzz Drilldrin', 5000, 1.5, 0)
 Astro = drillBit('AstroBit', 3000, 1, 1500)
 Apollo = drillBit('Apollo', 1000, 4, 2500)
 Chall = drillBit('ChallengDriller', 10000, 0, 0)
+
+
+
 
 
 def getCPR(testName):
@@ -78,7 +85,15 @@ def getCPH(testName):
 
 
 
+
+def getTotalHours(df):
+    sumHours = 0.0
+
+
+
 def TC (df):
+
+
     sumHours = 0.0
     sumFeet = 0.0
     row = 0
@@ -86,7 +101,7 @@ def TC (df):
     upCost = 0
 
     rowsCount = len(df.index) - 1
-    drillCounter = 0
+    drillCounter = 1
 
     flagBuzz = False
     flagAstro = False
@@ -121,6 +136,7 @@ def TC (df):
         sumFeet = sumFeet + deltaFt
     
         testName = df.loc[row, 'DRILL_BIT_NAME']
+
         if(flagBuzz == False):
             if (testName == Buzz.name):
                 flagBuzz = True
@@ -145,14 +161,16 @@ def TC (df):
         #CPR = getVals(testName)
     
         dID = df.loc[row, 'DRILL_BIT_ID'].item()
+        #print(dID)
         
         #get CPR CFR CPH
         
-    
+
+
         if (drillCounter != dID or row == rowsCount):
             #calcualte cost 
             print (drillCounter)
-        
+
 
             #costPR = getCPR(testName)
             costPF = getCPF(testName)
@@ -163,6 +181,9 @@ def TC (df):
             costOfDrill =  (sumFeet * costPF) + (sumHours * costPH)
             costOfChange = ((sumFeet / 100 * 30)/3600) * costPH
             #print (costOfDrill, costOfChange)
+
+
+
 
             overAllCost = overAllCost + costOfDrill + costOfChange
 
@@ -180,4 +201,16 @@ def TC (df):
     return(overAllCost)
 
 
+def getHours():
+    print("t")
+# GET AN AVERAGE OF ANY COLUMN
+def getAverage(df, columnName, roundOff):
+
+    # DEFINE THE DF AFTER ROUNDOFF
+    return round((df[columnName]).mean(), roundOff)
+def getMin(df, columnName, roundOff):
+    return round(df[columnName].min(), roundOff)
+
+def getMax(df, columnName, roundOff):
+    return round(df[columnName].max(), roundOff)
 
