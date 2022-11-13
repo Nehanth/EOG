@@ -17,6 +17,7 @@ import plotly_express as px
 import streamlit as st
 import streamlit
 import compare
+import coremltools as ct
 
 data = {
     "Asteroid 1": "Clean_Asteroid_1",
@@ -25,7 +26,7 @@ data = {
 
 st.set_page_config(page_title="Predict Bit", page_icon="⚙️")
 
-tabs = st.tabs(["Intro", "Analyis","Compare ", "Predict Drillbit", "Advanced Predict"])
+tabs = st.tabs(["Intro", "Analyis","Compare ",  "Advanced Predict"])
 image = "2560px-EOG_Resources_logo.svg.png"
 
 
@@ -56,26 +57,30 @@ with tab_visl:
     #             print(e)
     #             df = pd.read_excel(uf)
     #             streamlit.write("Please Upload file to the application")
+    streamlit.write("Depth and Hours")
 
 
-
-tab_ml_simple = tabs[3]
-with tab_ml_simple:
-    st.title("Prediction")
-    predict_text = st.text_input('Depth to drill: ', key="Simple")
-    # CALL MODEL
-    result = ""
-    st.metric(label="Recommended drillbit:  " + result, value=predict_text)
-
-
-tab_ml_advanced = tabs[4]
+tab_ml_advanced = tabs[3]
 with tab_ml_advanced:
     st.title("Advanced Prediction")
-    DESIRED_BIT_DEPTH = st.text_input('Depth to drill: ', key="Advanced")
-    DESIRED_RATE_OF_PENETRATION = st.text_input("Rate of penetration: ")
-    DESIRED_HOOK_LOAD = st.text_input("Hook Load: ")
-    DESIRED_DIFFERENTIAL_PRESSURE = st.text_input("Differential Pressure:")
-    DESIRED_WEIGHT_ON_BIT = st.text_input("Weight on bit: ")
+    with st.form(key="predict", clear_on_submit=False):
+        DESIRED_BIT_DEPTH = st.text_input('Depth to drill: ', key="Advanced")
+        DESIRED_RATE_OF_PENETRATION = st.text_input("Rate of penetration: ")
+        DESIRED_HOOK_LOAD = st.text_input("Hook Load: ")
+        DESIRED_DIFFERENTIAL_PRESSURE = st.text_input("Differential Pressure:")
+
+        # submit data
+        submitted = st.form_submit_button("Predict")
+
+        # Load the model
+        model = ct.models.MLModel('Data/model.mlmodel')
+
+        if submitted:
+            # Make predictions
+            prediction = model.predict({'BIT_DEPTH': float(DESIRED_BIT_DEPTH), 'RATE_OF_PENETRATION': float(DESIRED_RATE_OF_PENETRATION),
+                                        'HOOK_LOAD': float(DESIRED_HOOK_LOAD), 'DIFFERENTIAL_PRESSURE': float(DESIRED_DIFFERENTIAL_PRESSURE)})
+
+            st.write(prediction)
 
 tab_compare = tabs[2]
 with tab_compare:
