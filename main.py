@@ -18,6 +18,8 @@ import streamlit as st
 import streamlit
 import compare
 import coremltools as ct
+import random
+from streamlit_d3_demo import d3_line
 
 data = {
     "Asteroid 1": "Clean_Asteroid_1",
@@ -57,8 +59,10 @@ with tab_visl:
     #             print(e)
     #             df = pd.read_excel(uf)
     #             streamlit.write("Please Upload file to the application")
-    streamlit.write("Depth and Hours")
+    st.markdown("Data of Drilling Performance")
 
+    st.markdown("Depth vs Cost Curves")
+    st.markdown("Rank Drilling Performance")
 
 tab_ml_advanced = tabs[3]
 with tab_ml_advanced:

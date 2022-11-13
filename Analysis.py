@@ -4,7 +4,9 @@ import plotly_express as px
 import utils
 
 #list names [i] corresponds to list hours [i]
+
 utils.getListNames()
+
 utils.getListHours()
 
 
@@ -73,6 +75,7 @@ def analysis():
     except Exception as e:
         print(e)
         st.write("Please select dataset for analysis")
+
 
 
 
