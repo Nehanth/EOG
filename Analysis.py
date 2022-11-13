@@ -4,17 +4,16 @@ import plotly_express as px
 import utils
 
 
-
-
-
 data = {
 }
 options = ["Custom Dataset"]
 for i in range(1, 11):
     options.append("Asteroid " + str(i))
-    data["Asteroid "+ str(i)] = "./Data/cleanAsteroid"+str(i)+".csv"
+    data["Asteroid " + str(i)] = "./Data/cleanAsteroid"+str(i)+".csv"
 
-# - depth over
+# - depth
+
+
 def analysis():
     st.title("Data Analysis")
 
@@ -52,11 +51,6 @@ def analysis():
         st.sidebar.write("Total Rows:", len(df.index))
         st.sidebar.write('Total cost of this asteroid mining' + utils.TC(df))
 
-
-
     except Exception as e:
         print(e)
         st.write("Please select dataset for analysis")
-
-
-
