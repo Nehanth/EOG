@@ -19,7 +19,8 @@ import streamlit
 
 
 data = {
-    "Asteroid 1": "Clean_Asteroid_1"
+    "Asteroid 1": "Clean_Asteroid_1",
+    "Asteroid 2": "cleanAsteroid1.csv",
 }
 
 st.set_page_config(page_title="Predict Bit", page_icon="⚙️")

@@ -8,7 +8,7 @@ data = {
 options = ["Custom Dataset"]
 for i in range(1, 11):
     options.append("Asteroid " + str(i))
-    data["Asteroid 1"] = "./Data/cleanAsteroid"+str(i)+".csv"
+    data["Asteroid "+ str(i)] = "./Data/cleanAsteroid"+str(i)+".csv"
 
 
 def analysis():
