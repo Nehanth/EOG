@@ -84,10 +84,10 @@ def getCPH(testName):
     return(PH)
 
 
+listHours = ["","","","",""]
+listNames = ["","","","",""]
 
 
-def getTotalHours(df):
-    sumHours = 0.0
 
 
 
@@ -169,9 +169,11 @@ def TC (df):
 
         if (drillCounter != dID or row == rowsCount):
             #calcualte cost 
-            print (drillCounter)
-
-
+            #print (drillCounter)
+            listHours[drillCounter-1] = sumHours
+            listNames[drillCounter-1] = df.loc[row-1, 'DRILL_BIT_NAME']
+               
+            
             #costPR = getCPR(testName)
             costPF = getCPF(testName)
             costPH = getCPH(testName)
@@ -214,3 +216,8 @@ def getMin(df, columnName, roundOff):
 def getMax(df, columnName, roundOff):
     return round(df[columnName].max(), roundOff)
 
+def getListHours(listHours):
+    return(listHours)
+
+def getListNames(listNames):
+    return(listNames)
