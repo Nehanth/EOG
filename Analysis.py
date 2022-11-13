@@ -10,7 +10,7 @@ for i in range(1, 11):
     options.append("Asteroid " + str(i))
     data["Asteroid "+ str(i)] = "./Data/cleanAsteroid"+str(i)+".csv"
 
-
+# - depth over
 def analysis():
     st.title("Data Analysis")
 
@@ -35,6 +35,10 @@ def analysis():
             df = pd.read_csv(data[select])
 
         st.write(df)
+        st.sidebar.write('hello')
     except Exception as e:
         print(e)
         st.write("Please select dataset for analysis")
+
+
+

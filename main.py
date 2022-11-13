@@ -16,7 +16,7 @@ import Analysis
 import plotly_express as px
 import streamlit as st
 import streamlit
-
+import compare
 
 data = {
     "Asteroid 1": "Clean_Asteroid_1",
@@ -25,7 +25,7 @@ data = {
 
 st.set_page_config(page_title="Predict Bit", page_icon="⚙️")
 
-tabs = st.tabs(["Intro", "Analyis", "Predict Drillbit", "Advanced Predict"])
+tabs = st.tabs(["Intro", "Analyis","Compare ", "Predict Drillbit", "Advanced Predict"])
 image = "2560px-EOG_Resources_logo.svg.png"
 
 
@@ -58,7 +58,7 @@ with tab_visl:
     #             streamlit.write("Please Upload file to the application")
 
 
-tab_ml_simple = tabs[2]
+tab_ml_simple = tabs[3]
 with tab_ml_simple:
     st.title("Prediction")
     predict_text = st.text_input('Depth to drill: ', key="Simple")
@@ -67,7 +67,7 @@ with tab_ml_simple:
     st.metric(label="Recommended drillbit:  " + result, value=predict_text)
 
 
-tab_ml_advanced = tabs[3]
+tab_ml_advanced = tabs[4]
 with tab_ml_advanced:
     st.title("Advanced Prediction")
     DESIRED_BIT_DEPTH = st.text_input('Depth to drill: ', key="Advanced")
@@ -75,3 +75,7 @@ with tab_ml_advanced:
     DESIRED_HOOK_LOAD = st.text_input("Hook Load: ")
     DESIRED_DIFFERENTIAL_PRESSURE = st.text_input("Differential Pressure:")
     DESIRED_WEIGHT_ON_BIT = st.text_input("Weight on bit: ")
+
+tab_compare = tabs[2]
+with tab_compare:
+    compare.compare()
