@@ -35,7 +35,21 @@ def analysis():
             df = pd.read_csv(data[select])
 
         st.write(df)
-        st.sidebar.write('hello')
+
+        # DEFINE THE TITLE OF THE SIDEBAR
+        st.sidebar.title(select)
+
+        # DISPLAY ALL RELEVANT DATA FOR EACH COLUMN FOR THAT ROW
+        st.sidebar.header("Columns:")
+        for column in df.columns:
+            st.sidebar.write(column)
+
+        st.sidebar.subheader("Pertinent Info")
+        st.sidebar.write("Total Rows:", len(df.index))
+        st.sidebar.write("Drill Bits Used: ", )
+
+
+
     except Exception as e:
         print(e)
         st.write("Please select dataset for analysis")

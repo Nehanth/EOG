@@ -1,1 +1,2 @@
-def utils:
+def utils():
+    pass
