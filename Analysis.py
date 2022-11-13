@@ -1,6 +1,10 @@
 import streamlit as st
 import pandas as pd
 import plotly_express as px
+import utils
+
+
+
 
 
 data = {
@@ -46,7 +50,7 @@ def analysis():
 
         st.sidebar.subheader("Pertinent Info")
         st.sidebar.write("Total Rows:", len(df.index))
-        st.sidebar.write("Drill Bits Used: ", )
+        st.sidebar.write('Total cost of this asteroid mining' + utils.TC(df))
 
 
 
