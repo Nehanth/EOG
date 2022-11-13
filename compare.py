@@ -14,9 +14,14 @@ for i in range(1, 21):
 def compare():
     st.title("Compare Datasets")
     selections = st.multiselect("Asteroid to compare", options)
-
-    # DEFINE NUM ROWS
     numRows = 0
+
+    for element in selections:
+        dataset = pd.read_csv(data[element])
+        numRows += dataset.index
+
+    if(numRows):
+        st.sidebar.write("Total Num Rows Comparing: ", numRows)
 
     for selection in selections:
         dataset = pd.read_csv(data[selection])
@@ -27,7 +32,3 @@ def compare():
 
         # INCREASE NUM ROWS
         numRows += len(dataset.index)
-
-
-    if(numRows):
-        st.sidebar.write("Total Num Rows Comparing: ", numRows)

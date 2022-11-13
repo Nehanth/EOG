@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 import plotly_express as px
 import utils
+import random
+from streamlit_d3_demo import d3_line
+
 
 #list names [i] corresponds to list hours [i]
 
@@ -14,7 +17,7 @@ utils.getListHours()
 data = {
 }
 options = ["Custom Dataset"]
-for i in range(1, 11):
+for i in range(1, 21):
     options.append("Asteroid " + str(i))
     data["Asteroid "+ str(i)] = "./Data/cleanAsteroid"+str(i)+".csv"
 
@@ -55,9 +58,6 @@ def analysis():
 
         st.sidebar.subheader("Pertinent Info")
         st.sidebar.write("Total Rows:", len(df.index))
-        TOTAL_COST = int(utils.TC(df))
-        st.sidebar.write('Total cost:', TOTAL_COST)
-        st.sidebar.write('Drill Bits: ', utils.bits)
 
 
         # DISPLAY ALL RELEVANT DATA FOR EACH COLUMN FOR THAT ROW
@@ -71,10 +71,38 @@ def analysis():
                 st.sidebar.write("Min:", utils.getMin(df, column, roundOff))
                 st.sidebar.write("Max:", utils.getMax(df, column, roundOff))
 
+            # CREATE DATASET THAT HAS DEPTH OVER COST
+            # [DRILL BIT, COST]
+            # [.. , ..]
+
+        graph_options = ["Rate of Penetration", "Bit Occurrence", "Depth vs. Cost", ]
+        selection = st.multiselect('Graph Options: ', graph_options)
+
+        if("Rate of Penetration" in selection):
+            st.write("Penetration Rate")
+
+            # CREATE A BITDEPTH OVER RATE OF PENETRATION
+            st.line_chart(df[['BIT_DEPTH','RATE_OF_PENETRATION']], x='BIT_DEPTH', y="RATE_OF_PENETRATION")
+
+        if("Bit Occurrence" in selection):
+            st.write("Bit Occurrence")
+
+            st.bar_chart(utils.getBitOccurrences(df))
+
+        if("Depth vs. Cost" in selection):
+            st.write("Depth vs Cost Curve")
+
+            st.bar_chart(utils.TC(df))
+
+
+
+
+
+
+
 
     except Exception as e:
         print(e)
-        st.write("Please select dataset for analysis")
 
 
 

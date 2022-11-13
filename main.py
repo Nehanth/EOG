@@ -20,8 +20,10 @@ import compare
 import coremltools as ct
 import random
 from streamlit_d3_demo import d3_line
+
 from streamlit_vega_lite import vega_lite_component, altair_component
 
+import utils
 
 data = {
     "Asteroid 1": "Clean_Asteroid_1",
@@ -30,43 +32,36 @@ data = {
 
 st.set_page_config(page_title="Predict Bit", page_icon="⚙️")
 
-tabs = st.tabs(["Intro", "Analyis","Compare ",  "Advanced Predict"])
+tabs = st.tabs(["Intro", "Analyis",  "Advanced Predict"])
 image = "2560px-EOG_Resources_logo.svg.png"
 
 
 tab_intro = tabs[0]
 with tab_intro:
     st.title("Intro")
+    st.header("Welcome to our Analysis and Prediction Tool")
+
+    st.subheader("Team")
+    st.write("Nehanth Narendrula")
+    st.write("Srilokh Karuturi")
+    st.write("Lokesh Narasani")
+    st.write("Hamza Zulquernain")
+
+
+
+    st.subheader("Bit Information")
+    st.write(utils.bitDataframe)
+
 
 tab_visl = tabs[1]
 with tab_visl:
     Analysis.analysis()
-    # st.title("Data Analysis")
-    # options = ["Custom"]
-    # for i in range(1, 11):
-    #     options.append("Asteroids " + str(i))
-    # select = st.selectbox("Input", options)
 
-    # if select == "Custom":
-    #     # st.experimental_rerun()
+# tab_compare = tabs[2]
+# with tab_compare:
+#     compare.compare()
 
-    #     uf = st.file_uploader(label="Custom Dataset",
-    #                           type=['csv', 'xlsx'])
-    #     if uf is not None:
-    #         print(uf)
-    #         print("Uploaded Sucessfully")
-    #         try:
-    #             df = pd.read_csv(uf)
-    #         except Exception as e:
-    #             print(e)
-    #             df = pd.read_excel(uf)
-    #             streamlit.write("Please Upload file to the application")
-    st.markdown("Data of Drilling Performance")
-
-    st.markdown("Depth vs Cost Curves")
-    st.markdown("Rank Drilling Performance")
-
-tab_ml_advanced = tabs[3]
+tab_ml_advanced = tabs[2]
 with tab_ml_advanced:
     st.title("Advanced Prediction")
     with st.form(key="predict", clear_on_submit=False):
@@ -86,8 +81,10 @@ with tab_ml_advanced:
             prediction = model.predict({'BIT_DEPTH': float(DESIRED_BIT_DEPTH), 'RATE_OF_PENETRATION': float(DESIRED_RATE_OF_PENETRATION),
                                         'HOOK_LOAD': float(DESIRED_HOOK_LOAD), 'DIFFERENTIAL_PRESSURE': float(DESIRED_DIFFERENTIAL_PRESSURE)})
 
-            st.write(prediction)
 
-tab_compare = tabs[2]
-with tab_compare:
-    compare.compare()
+            st.metric(label="Recommended Bit: ", value = prediction["DRILL_BIT_NAME"], help="Prediction from a TensorFlow Model")
+
+
+
+
+
