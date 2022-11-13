@@ -3,7 +3,9 @@ import pandas as pd
 import plotly_express as px
 import utils
 
-
+#list names [i] corresponds to list hours [i]
+utils.getListNames()
+utils.getListHours()
 
 
 
