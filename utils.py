@@ -216,8 +216,8 @@ def getMin(df, columnName, roundOff):
 def getMax(df, columnName, roundOff):
     return round(df[columnName].max(), roundOff)
 
-def getListHours(listHours):
+def getListHours():
     return(listHours)
 
-def getListNames(listNames):
+def getListNames():
     return(listNames)
