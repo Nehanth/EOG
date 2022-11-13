@@ -1,5 +1,6 @@
 # EOG
 
+!["IMAG"](2560px-EOG_Resources_logo.svg.png)
 
 ## TEAM
 
