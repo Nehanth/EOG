@@ -223,7 +223,7 @@ def TC (df):
 
 
             # APPEND TO DATAFRAME
-            outputDF.loc[len(outputDF.index)] = [str(sumFeet), str(overAllCost)]
+            outputDF.loc[len(outputDF.index)] = [str(sumFeet), str(int(overAllCost))]
 
 
             sumFeet = 0
@@ -237,8 +237,9 @@ def TC (df):
 
         #sum = sum + deltaFt
     print(outputDF)
-    return outputDF
     overAllCost = overAllCost + upCost
+    return outputDF
+
     # return(overAllCost)
 
 
